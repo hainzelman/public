@@ -172,7 +172,7 @@
     .hidden {
         display: none;
     }
-    .scrollup {
-        display: none !important;
-    }
+}
+.scrollup {
+    display: none !important;
 }
