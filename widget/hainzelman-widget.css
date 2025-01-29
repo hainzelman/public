@@ -7,7 +7,7 @@
         bottom: 45px;
         right: 135px;
         height: 100%;
-        max-height: 60%;
+        max-height: 65%;
         min-height: 200px;
         width: 100%;
         max-width: 25%;
@@ -21,14 +21,14 @@
         transform: scale(0.95);
         opacity: 0;
         transition: transform 0.3s ease, opacity 0.3s ease;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3),
-            0px 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1),
+            0px 1px 3px rgba(0, 0, 0, 0.06);
     }
 
     .hainzelman-widget-bubble {
         position: fixed;
-        bottom: 45px;
-        right: 45px;
+        bottom: 120px;
+        right: 60px;
         background-color: white;
         width: 48px;
         height: 48px;
@@ -40,8 +40,8 @@
         justify-content: center;
         align-items: center;
         background-color: white;
-        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25),
-            0px 4px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.15),
+            0px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .hainzelman-widget-navbar {
@@ -102,7 +102,21 @@
         margin-left: 45px;
         color: #787a7e;
     }
-
+    .hainzelman-widget-message-icon {
+        svg {
+            transform: unset !important;
+        }
+    }
+    .hainzelman-widget-send-button {
+        svg {
+            transform: unset !important;
+        }
+    }
+    .hainzelman-widget-bubble {
+        svg {
+            transform: unset !important;
+        }
+    }
     .hainzelman-widget-input-wrapper {
         display: flex;
         gap: 5px;
