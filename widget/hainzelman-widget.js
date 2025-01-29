@@ -53,7 +53,7 @@ const messageTemplate = (content, role) => {
 };
 
 const LOCAL_STORAGE = {
-    chatId: "HAINZELMAN_CHAT_ID"
+    chatId: "HAINZELMAN_CHAT_ID",
 };
 
 class HainzelmanUtil {
@@ -71,14 +71,18 @@ class HainzelmanUtil {
                 method: "POST",
                 headers: {
                     Authorization: this.auth,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     isWidgetChat: true,
-                    rag: true
-                })
+                    rag: true,
+                }),
             });
-            if (!response.ok) return console.error("Failed to create chat", await response.text());
+            if (!response.ok)
+                return console.error(
+                    "Failed to create chat",
+                    await response.text()
+                );
 
             const data = await response.json();
             return data.result;
@@ -93,8 +97,8 @@ class HainzelmanUtil {
             const response = await fetch(`${this.baseUrl}/chat/${chatId}`, {
                 method: "GET",
                 headers: {
-                    Authorization: this.auth
-                }
+                    Authorization: this.auth,
+                },
             });
             if (!response.ok) throw Error(await response.text());
 
@@ -112,12 +116,12 @@ class HainzelmanUtil {
                 method: "POST",
                 headers: {
                     Authorization: this.auth,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     chatId,
-                    prompt
-                })
+                    prompt,
+                }),
             });
 
             if (!response.ok) throw Error(await response.text());
@@ -136,13 +140,13 @@ class HainzelmanUtil {
                 method: "POST",
                 headers: {
                     Authorization: this.auth,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     chatId,
                     prompt,
-                    supportEmail
-                })
+                    supportEmail,
+                }),
             });
 
             if (!response.ok) throw Error(await response.text());
@@ -166,7 +170,7 @@ class HainzelmanWidget {
             chat: {},
             minimized: true,
             redirectToHuman: false,
-            waitingResponse: false
+            waitingResponse: false,
         },
         {
             set: (target, property, value) => {
@@ -175,13 +179,18 @@ class HainzelmanWidget {
                     if (property === "chat") this.createChatHistory();
                     if (property === "waitingResponse") {
                         value === true
-                            ? this.selectors.agentTyping.classList.remove("hidden")
-                            : this.selectors.agentTyping.classList.add("hidden");
+                            ? this.selectors.agentTyping.classList.remove(
+                                  "hidden"
+                              )
+                            : this.selectors.agentTyping.classList.add(
+                                  "hidden"
+                              );
                         this.selectors.input.disabled = value;
+                        this.selectors.input.focus();
                     }
                 }
                 return true;
-            }
+            },
         }
     );
 
@@ -191,20 +200,20 @@ class HainzelmanWidget {
         windowBody: undefined,
         sendButton: undefined,
         input: undefined,
-        agentTyping: undefined
+        agentTyping: undefined,
     };
 
-    constructor() { }
+    constructor() {}
 
     static init(containerSelector, config) {
         const instance = new HainzelmanWidget();
 
         if (!config.console) {
             console = {
-                log: () => { },
-                debug: () => { },
-                warn: () => { },
-                error: () => { }
+                log: () => {},
+                debug: () => {},
+                warn: () => {},
+                error: () => {},
             };
         }
 
@@ -219,7 +228,9 @@ class HainzelmanWidget {
 
     async initChat() {
         const chatId = localStorage.getItem(LOCAL_STORAGE.chatId);
-        const chat = chatId ? await this.fetch.getChat(chatId) : await this.fetch.createChat();
+        const chat = chatId
+            ? await this.fetch.getChat(chatId)
+            : await this.fetch.createChat();
 
         if (!chat) {
             return localStorage.removeItem(LOCAL_STORAGE.chatId);
@@ -230,10 +241,10 @@ class HainzelmanWidget {
             messages: [
                 {
                     role: "assistant",
-                    content: this.config.greetingMessage
+                    content: this.config.greetingMessage,
                 },
-                ...(chat?.messages || [])
-            ]
+                ...(chat?.messages || []),
+            ],
         };
         localStorage.setItem(LOCAL_STORAGE.chatId, this.state.chat.id);
     }
@@ -251,7 +262,9 @@ class HainzelmanWidget {
     }
 
     createChatMessage(content, role) {
-        this.selectors.windowBody.appendChild(this.createElementFromTemplate(messageTemplate(content, role)));
+        this.selectors.windowBody.appendChild(
+            this.createElementFromTemplate(messageTemplate(content, role))
+        );
         this.scrollToLastMessage();
     }
 
@@ -261,12 +274,24 @@ class HainzelmanWidget {
     }
 
     addSelectors() {
-        this.selectors.bubble = this.root.querySelector(".hainzelman-widget-bubble");
-        this.selectors.window = this.root.querySelector(".hainzelman-widget-window");
-        this.selectors.windowBody = this.root.querySelector(".hainzelman-widget-window-body");
-        this.selectors.sendButton = this.root.querySelector(".hainzelman-widget-send-button");
-        this.selectors.input = this.root.querySelector(".hainzelman-widget-input");
-        this.selectors.agentTyping = this.root.querySelector(".hainzelman-widget-agent-typing");
+        this.selectors.bubble = this.root.querySelector(
+            ".hainzelman-widget-bubble"
+        );
+        this.selectors.window = this.root.querySelector(
+            ".hainzelman-widget-window"
+        );
+        this.selectors.windowBody = this.root.querySelector(
+            ".hainzelman-widget-window-body"
+        );
+        this.selectors.sendButton = this.root.querySelector(
+            ".hainzelman-widget-send-button"
+        );
+        this.selectors.input = this.root.querySelector(
+            ".hainzelman-widget-input"
+        );
+        this.selectors.agentTyping = this.root.querySelector(
+            ".hainzelman-widget-agent-typing"
+        );
     }
 
     addListeners() {
@@ -326,15 +351,25 @@ class HainzelmanWidget {
 
         let data;
         if (this.state.redirectToHuman) {
-            data = await this.fetch.sendContactData(this.state.chat.id, prompt, this.config.supportEmail);
+            data = await this.fetch.sendContactData(
+                this.state.chat.id,
+                prompt,
+                this.config.supportEmail
+            );
         } else {
             data = await this.fetch.sendMessage(this.state.chat.id, prompt);
         }
         if (!data) {
-            return this.createChatMessage("Something went wrong", "assistant-err");
+            return this.createChatMessage(
+                "Something went wrong",
+                "assistant-err"
+            );
         }
 
-        if (("redirect" in data && data.redirect) || ("validMail" in data && data.validEmail)) {
+        if (
+            ("redirect" in data && data.redirect) ||
+            ("validMail" in data && data.validEmail)
+        ) {
             this.state.redirectToHuman = true;
         }
 
@@ -344,7 +379,7 @@ class HainzelmanWidget {
 }
 
 window.Hainzelman = {
-    Widget: HainzelmanWidget
+    Widget: HainzelmanWidget,
 };
 
 // Import fonts

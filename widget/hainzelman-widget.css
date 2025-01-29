@@ -27,7 +27,7 @@
 
     .hainzelman-widget-bubble {
         position: fixed;
-        bottom: 60px;
+        bottom: 120px;
         right: 60px;
         background-color: white;
         width: 48px;
@@ -84,7 +84,6 @@
 
     .hainzelman-widget-message-content {
         max-width: 90%;
-
         p {
             margin: unset;
             padding: unset;
@@ -103,31 +102,35 @@
         margin-left: 45px;
         color: #787a7e;
     }
-
     .hainzelman-widget-message-icon {
         svg {
             transform: unset !important;
         }
     }
-
     .hainzelman-widget-send-button {
         svg {
             transform: unset !important;
         }
     }
-
     .hainzelman-widget-bubble {
         svg {
             transform: unset !important;
         }
     }
-
+    .hainzelman-widget-agent-typing {
+        margin-top: 10px;
+        padding-left: 45px;
+        p {
+            margin: unset;
+            padding: unset;
+        }
+    }
     .hainzelman-widget-input-wrapper {
         display: flex;
         gap: 5px;
         border-top: 1px solid #787a7e;
         padding: 0px 10px;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .hainzelman-widget-input {
@@ -169,9 +172,7 @@
     .hidden {
         display: none;
     }
-}
-
-/* LISCR demo */
-.scrollup {
-    display: none !important;
+    .scrollup {
+        display: none !important;
+    }
 }
