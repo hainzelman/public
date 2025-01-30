@@ -27,7 +27,7 @@
 
     .hainzelman-widget-bubble {
         position: fixed;
-        bottom: 120px;
+        bottom: 60px;
         right: 60px;
         background-color: white;
         width: 48px;
@@ -84,6 +84,7 @@
 
     .hainzelman-widget-message-content {
         max-width: 90%;
+
         p {
             margin: unset;
             padding: unset;
@@ -102,29 +103,35 @@
         margin-left: 45px;
         color: #787a7e;
     }
+
     .hainzelman-widget-message-icon {
         svg {
             transform: unset !important;
         }
     }
+
     .hainzelman-widget-send-button {
         svg {
             transform: unset !important;
         }
     }
+
     .hainzelman-widget-bubble {
         svg {
             transform: unset !important;
         }
     }
+
     .hainzelman-widget-agent-typing {
         margin-top: 10px;
         padding-left: 45px;
+
         p {
             margin: unset;
             padding: unset;
         }
     }
+
     .hainzelman-widget-input-wrapper {
         display: flex;
         gap: 5px;
@@ -173,6 +180,7 @@
         display: none;
     }
 }
+
 .scrollup {
     display: none !important;
 }
