@@ -180,11 +180,11 @@ class HainzelmanWidget {
                     if (property === "waitingResponse") {
                         value === true
                             ? this.selectors.agentTyping.classList.remove(
-                                  "hidden"
-                              )
+                                "hidden"
+                            )
                             : this.selectors.agentTyping.classList.add(
-                                  "hidden"
-                              );
+                                "hidden"
+                            );
                         this.selectors.input.disabled = value;
                         this.selectors.input.focus();
                     }
@@ -203,17 +203,17 @@ class HainzelmanWidget {
         agentTyping: undefined,
     };
 
-    constructor() {}
+    constructor() { }
 
     static init(containerSelector, config) {
         const instance = new HainzelmanWidget();
 
         if (!config.console) {
             console = {
-                log: () => {},
-                debug: () => {},
-                warn: () => {},
-                error: () => {},
+                log: () => { },
+                debug: () => { },
+                warn: () => { },
+                error: () => { },
             };
         }
 
@@ -262,9 +262,14 @@ class HainzelmanWidget {
     }
 
     createChatMessage(content, role) {
-        this.selectors.windowBody.appendChild(
-            this.createElementFromTemplate(messageTemplate(content, role))
-        );
+        const msgEl = this.createElementFromTemplate(messageTemplate(content, role))
+        if (window.markdownit) {
+            const md = window.markdownit();
+
+            msgEl.querySelector(".hainzelman-widget-message-content").innerHTML = md.render(content)
+
+        }
+        this.selectors.windowBody.appendChild(msgEl);
         this.scrollToLastMessage();
     }
 
