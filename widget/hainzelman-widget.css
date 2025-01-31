@@ -7,10 +7,10 @@
         bottom: 45px;
         right: 135px;
         height: 100%;
-        max-height: 65%;
+        max-height: 70%;
         min-height: 200px;
         width: 100%;
-        max-width: 25%;
+        max-width: 30%;
         min-width: 290px;
         border-radius: 20px;
         padding: 20px;
@@ -49,7 +49,7 @@
         margin-bottom: 20px;
 
         .logo {
-            max-width: 300px;
+            max-width: 250px;
             margin-bottom: 10px;
         }
     }
@@ -75,7 +75,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        font-size: 22px;
+        font-size: 19px;
         line-height: 28px;
         gap: 30px;
         scrollbar-width: thin;
@@ -144,7 +144,7 @@
         flex-grow: 1;
         border: none;
         margin-top: 10px;
-        font-size: 22px;
+        font-size: 19px;
         align-content: center;
         resize: none;
     }
